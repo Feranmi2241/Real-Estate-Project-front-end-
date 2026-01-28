@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { MdLocationOn } from 'react-icons/md';
 import { FaBed, FaBath } from 'react-icons/fa';
+import { getImageUrl } from '../utils/imageUtils.js';
 
 export default function ListingItem({ listing }) {
   return (
@@ -10,7 +11,7 @@ export default function ListingItem({ listing }) {
           <div className="h-48 bg-slate-700 overflow-hidden relative">
             <img
               src={
-                listing.imageUrls[0] ||
+                getImageUrl(listing.imageUrls[0]) ||
                 'https://53.fs1.hubspotusercontent-na1.net/hub/53/hubfs/Sales_Blog/real-estate-business-compressor.jpg?width=595&height=400&name=real-estate-business-compressor.jpg'
               }
               alt='listing cover'

@@ -9,6 +9,7 @@ import { MapContainer, TileLayer, Marker } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
 import ChatWindow from "../components/ChatWindow";
+import { getImageUrl } from '../utils/imageUtils.js';
 
 // Fix for default markers in react-leaflet
 delete L.Icon.Default.prototype._getIconUrl;
@@ -340,7 +341,7 @@ const Listing = () => {
                 <div
                   className="h-[300px] sm:h-[400px] md:h-[500px] lg:h-[550px]"
                   style={{
-                    background: `url(${url}) center no-repeat`,
+                    background: `url(${getImageUrl(url)}) center no-repeat`,
                     backgroundSize: "cover",
                   }}
                 ></div>

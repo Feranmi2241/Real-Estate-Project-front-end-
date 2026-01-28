@@ -17,6 +17,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay } from 'swiper/modules';
 import 'swiper/css/bundle';
 import '../styles/animations.css';
+import { getImageUrl } from '../utils/imageUtils.js';
 
 const Profile = () => {
   const fileRef = useRef(null);
@@ -58,7 +59,8 @@ const Profile = () => {
     
     try {
       setUploading(true);
-      const res = await fetch(`/api/user-profile/upload-avatar/${currentUser._id}`, {
+      const apiBaseUrl = import.meta.env.VITE_API_BASE_URL || '';
+      const res = await fetch(`${apiBaseUrl}/api/user-profile/upload-avatar/${currentUser._id}`, {
         method: 'POST',
         credentials: 'include',
         body: formDataUpload,
@@ -108,7 +110,7 @@ const Profile = () => {
         return;
       }
 
-      const res = await fetch(`/api/user-profile/update/${currentUser._id}`, {
+      const res = await fetch(`${import.meta.env.VITE_API_BASE_URL || ''}/api/user-profile/update/${currentUser._id}`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -146,7 +148,7 @@ const Profile = () => {
   const handleDeleteUser = async () => {
     try {
       dispatch(deleteUserStart());
-      const res = await fetch(`/api/user-profile/delete/${currentUser._id}`, {
+      const res = await fetch(`${import.meta.env.VITE_API_BASE_URL || ''}/api/user-profile/delete/${currentUser._id}`, {
         method: "DELETE",
         credentials: 'include',
       });
@@ -172,7 +174,7 @@ const Profile = () => {
   const handleSignOut = async () => {
     try {
       dispatch(signOutUserStart());
-      const res = await fetch(`/api/auth/signout`, {
+      const res = await fetch(`${import.meta.env.VITE_API_BASE_URL || ''}/api/auth/signout`, {
         credentials: 'include'
       });
       const data = await res.json();
@@ -190,7 +192,7 @@ const Profile = () => {
   const handleShowListings = async () => {
     try {
       setShowListingsError(false);
-      const res = await fetch(`/api/user-profile/listings/${currentUser._id}`, {
+      const res = await fetch(`${import.meta.env.VITE_API_BASE_URL || ''}/api/user-profile/listings/${currentUser._id}`, {
         credentials: 'include'
       });
       const data = await res.json();
@@ -210,7 +212,7 @@ const Profile = () => {
 
   const handleListingDelete = async (listingId) => {
     try {
-      const res = await fetch(`/api/listing/delete/${listingId}`, {
+      const res = await fetch(`${import.meta.env.VITE_API_BASE_URL || ''}/api/listing/delete/${listingId}`, {
         method: "DELETE",
         credentials: 'include',
         });
@@ -277,7 +279,7 @@ const Profile = () => {
             <div className='flex flex-col items-center animate-fade-in-up animation-delay-300'>
               <img
                 onClick={() => fileRef.current.click()}
-                src={formData.avatar || currentUser.avatar}
+                src={getImageUrl(formData.avatar || currentUser.avatar)}
                 alt="profile"
                 className="rounded-full h-32 w-32 object-cover cursor-pointer border-4 border-white/30 shadow-2xl hover:scale-110 transition-all duration-300 hover:border-rose-400/50"
               />
@@ -431,7 +433,7 @@ const Profile = () => {
                 >
                   <Link to={`/listing/${listing._id}`} className="flex-shrink-0">
                     <img 
-                      src={listing.imageUrls[0]}
+                      src={getImageUrl(listing.imageUrls[0])}
                       alt="listing cover"
                       className="h-16 w-16 sm:h-20 sm:w-20 object-cover rounded-xl shadow-lg hover:scale-110 transition-transform duration-300"  
                     />                

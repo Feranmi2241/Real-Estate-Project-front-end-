@@ -2,6 +2,7 @@ import { FaSearch, FaBars, FaTimes } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
+import { getImageUrl } from '../utils/imageUtils.js';
 
 const Header = () => {
   const { currentUser } = useSelector((state) => state.user);
@@ -69,7 +70,7 @@ const Header = () => {
         </form>
         
         {/* Desktop Navigation */}
-        <ul className="hidden lg:flex gap-4 xl:gap-6 items-center">
+        <ul className="hidden md:flex gap-4 xl:gap-6 items-center">
           <Link to="/" className="group">
             <li className="text-slate-700 hover:text-transparent hover:bg-clip-text hover:bg-gradient-to-r hover:from-blue-600 hover:to-purple-600 transition-all duration-300 font-medium relative text-sm xl:text-base">
               Home
@@ -102,7 +103,7 @@ const Header = () => {
             {currentUser ? (
               <div className="relative">
                 <img
-                  src={currentUser.avatar}
+                  src={getImageUrl(currentUser.avatar)}
                   alt="avatar"
                   className="rounded-full h-7 w-7 sm:h-8 sm:w-8 object-cover border-2 border-white shadow-lg transition-all duration-300 group-hover:scale-110 group-hover:border-purple-500 group-hover:shadow-xl"
                 />
@@ -120,7 +121,7 @@ const Header = () => {
         {/* Mobile Menu Button */}
         <button
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-          className="lg:hidden p-2 rounded-lg bg-white/80 backdrop-blur-lg shadow-lg border border-white/30 text-slate-700 hover:text-purple-600 transition-all duration-300 hover:scale-105"
+          className="md:hidden p-2 rounded-lg bg-white/80 backdrop-blur-lg shadow-lg border border-white/30 text-slate-700 hover:text-purple-600 transition-all duration-300 hover:scale-105"
         >
           {isMobileMenuOpen ? <FaTimes className="w-5 h-5" /> : <FaBars className="w-5 h-5" />}
         </button>
@@ -128,7 +129,7 @@ const Header = () => {
 
       {/* Mobile Menu */}
       {isMobileMenuOpen && (
-        <div className="lg:hidden absolute top-full left-0 right-0 bg-white/95 backdrop-blur-lg border-t border-white/30 shadow-xl z-50">
+        <div className="md:hidden absolute top-full left-0 right-0 bg-white/95 backdrop-blur-lg border-t border-white/30 shadow-xl z-50">
           <div className="max-w-6xl mx-auto p-4 space-y-4">
             {/* Mobile Search */}
             <form onSubmit={handleSubmit} className="relative group md:hidden">
@@ -180,7 +181,7 @@ const Header = () => {
                   {currentUser ? (
                     <>
                       <img
-                        src={currentUser.avatar}
+                        src={getImageUrl(currentUser.avatar)}
                         alt="avatar"
                         className="rounded-full h-8 w-8 object-cover border-2 border-white shadow-lg"
                       />

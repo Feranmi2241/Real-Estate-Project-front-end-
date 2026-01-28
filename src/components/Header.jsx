@@ -129,7 +129,7 @@ const Header = () => {
 
       {/* Mobile Menu */}
       {isMobileMenuOpen && (
-        <div className="xl:hidden absolute top-full left-0 right-0 bg-white/95 backdrop-blur-lg border-t border-white/30 shadow-xl z-50">
+        <div className="xl:hidden fixed top-full left-0 right-0 bg-white/95 backdrop-blur-lg border-t border-white/30 shadow-xl z-[9999] w-full">
           <div className="max-w-6xl mx-auto p-4 space-y-4">
             {/* Mobile Search */}
             <form onSubmit={handleSubmit} className="relative group xl:hidden">

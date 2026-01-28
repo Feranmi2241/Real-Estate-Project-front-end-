@@ -6,6 +6,7 @@ import SwiperCore from 'swiper';
 import 'swiper/css/bundle';
 import '../styles/animations.css';
 import ListingItem from '../components/ListingItem';
+import { getImageUrl } from '../utils/imageUtils.js';
 
 export default function Home() {
   const [offerListings, setOfferListings] = useState([]);
@@ -16,7 +17,7 @@ export default function Home() {
   useEffect(() => {
     const fetchOfferListings = async () => {
       try {
-        const res = await fetch('/api/listing/get?offer=true&limit=4');
+        const res = await fetch(`${import.meta.env.VITE_API_BASE_URL || ''}/api/listing/get?offer=true&limit=4`);
         const data = await res.json();
         setOfferListings(data);
         fetchRentListings();
@@ -26,7 +27,7 @@ export default function Home() {
     };
     const fetchRentListings = async () => {
       try {
-        const res = await fetch('/api/listing/get?type=rent&limit=4');
+        const res = await fetch(`${import.meta.env.VITE_API_BASE_URL || ''}/api/listing/get?type=rent&limit=4`);
         const data = await res.json();
         setRentListings(data);
         fetchSaleListings();
@@ -37,7 +38,7 @@ export default function Home() {
 
     const fetchSaleListings = async () => {
       try {
-        const res = await fetch('/api/listing/get?type=sale&limit=4');
+        const res = await fetch(`${import.meta.env.VITE_API_BASE_URL || ''}/api/listing/get?type=sale&limit=4`);
         const data = await res.json();
         setSaleListings(data);
       } catch (error) {
@@ -89,7 +90,7 @@ export default function Home() {
                     <div className='relative group h-full'>
                       <div
                         style={{
-                          background: `url(${listing.imageUrls[0]}) center no-repeat`,
+                          background: `url(${getImageUrl(listing.imageUrls[0])}) center no-repeat`,
                           backgroundSize: 'cover',
                         }}
                         className='h-full transition-transform duration-700 group-hover:scale-105'

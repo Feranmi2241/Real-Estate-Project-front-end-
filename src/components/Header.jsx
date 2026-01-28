@@ -70,7 +70,7 @@ const Header = () => {
         </form>
         
         {/* Desktop Navigation */}
-        <ul className="hidden xl:flex gap-4 xl:gap-6 items-center">
+        <ul className="hidden 2xl:flex gap-4 xl:gap-6 items-center">
           <Link to="/" className="group">
             <li className="text-slate-700 hover:text-transparent hover:bg-clip-text hover:bg-gradient-to-r hover:from-blue-600 hover:to-purple-600 transition-all duration-300 font-medium relative text-sm xl:text-base">
               Home
@@ -121,7 +121,7 @@ const Header = () => {
         {/* Mobile Menu Button */}
         <button
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-          className="xl:hidden p-2 rounded-lg bg-white/80 backdrop-blur-lg shadow-lg border border-white/30 text-slate-700 hover:text-purple-600 transition-all duration-300 hover:scale-105"
+          className="2xl:hidden p-2 rounded-lg bg-white/80 backdrop-blur-lg shadow-lg border border-white/30 text-slate-700 hover:text-purple-600 transition-all duration-300 hover:scale-105"
         >
           {isMobileMenuOpen ? <FaTimes className="w-5 h-5" /> : <FaBars className="w-5 h-5" />}
         </button>
@@ -129,10 +129,10 @@ const Header = () => {
 
       {/* Mobile Menu */}
       {isMobileMenuOpen && (
-        <div className="xl:hidden fixed top-full left-0 right-0 bg-white/95 backdrop-blur-lg border-t border-white/30 shadow-xl z-[9999] w-full">
+        <div className="2xl:hidden fixed top-full left-0 right-0 bg-white/95 backdrop-blur-lg border-t border-white/30 shadow-xl z-[9999] w-full">
           <div className="max-w-6xl mx-auto p-4 space-y-4">
             {/* Mobile Search */}
-            <form onSubmit={handleSubmit} className="relative group xl:hidden">
+            <form onSubmit={handleSubmit} className="relative group 2xl:hidden">
               <div className="relative bg-white/80 backdrop-blur-lg p-3 rounded-full shadow-lg border border-white/30 transition-all duration-500 group-hover:shadow-xl group-focus-within:shadow-xl">
                 <div className="absolute inset-0 bg-gradient-to-r from-blue-500/20 via-purple-500/20 to-pink-500/20 rounded-full opacity-0 group-hover:opacity-100 group-focus-within:opacity-100 transition-opacity duration-500"></div>
                 <div className="relative flex items-center">

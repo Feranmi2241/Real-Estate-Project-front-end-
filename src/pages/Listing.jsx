@@ -62,7 +62,7 @@ const Listing = () => {
     const fetchListing = async () => {
       try {
         setLoading(true);
-        const res = await fetch(`/api/listing/get/${params.listingId}`);
+        const res = await fetch(`${import.meta.env.VITE_API_BASE_URL || ''}/api/listing/get/${params.listingId}`);
         const data = await res.json();
         if (data.success === false) {
           setError(true);
@@ -81,7 +81,7 @@ const Listing = () => {
 
     const fetchBankConfig = async () => {
       try {
-        const res = await fetch('/api/listing/admin/bank-config');
+        const res = await fetch(`${import.meta.env.VITE_API_BASE_URL || ''}/api/listing/admin/bank-config`);
         const data = await res.json();
         setBankConfig(data);
       } catch (error) {
@@ -101,7 +101,7 @@ const Listing = () => {
   const startChatWithAdmin = async () => {
     try {
       // Create or get existing chat
-      const res = await fetch('/api/chat/create', {
+      const res = await fetch(`${import.meta.env.VITE_API_BASE_URL || ''}/api/chat/create`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -115,7 +115,7 @@ const Listing = () => {
         setCurrentChatId(data.data._id);
         
         // Send initial listing message
-        await fetch('/api/chat/message', {
+        await fetch(`${import.meta.env.VITE_API_BASE_URL || ''}/api/chat/message`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
@@ -138,7 +138,7 @@ const Listing = () => {
   const verifyPaystackPayment = async (reference) => {
     try {
       // For now, just save the transaction directly since we're in test mode
-      const res = await fetch('/api/transactions/save', {
+      const res = await fetch(`${import.meta.env.VITE_API_BASE_URL || ''}/api/transactions/save`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -267,7 +267,7 @@ const Listing = () => {
 
   const saveFlutterwaveTransaction = async (transactionData) => {
     try {
-      await fetch('/api/transactions/save', {
+      await fetch(`${import.meta.env.VITE_API_BASE_URL || ''}/api/transactions/save`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

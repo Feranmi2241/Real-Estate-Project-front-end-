@@ -28,7 +28,7 @@ export default function AdminLogin() {
     setError('');
 
     try {
-      const res = await fetch('/api/admin/auth/login', {
+      const res = await fetch(`${import.meta.env.VITE_API_BASE_URL || ''}/api/admin/auth/login`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData)
@@ -58,7 +58,7 @@ export default function AdminLogin() {
     setError('');
 
     try {
-      const res = await fetch('/api/admin/auth/forgot-password', {
+      const res = await fetch(`${import.meta.env.VITE_API_BASE_URL || ''}/api/admin/auth/forgot-password`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email: formData.email })

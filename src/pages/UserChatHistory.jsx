@@ -22,7 +22,7 @@ export default function UserChatHistory() {
   const fetchChats = async () => {
     setLoading(true);
     try {
-      const res = await fetch(`/api/chat/user/${currentUser._id}`);
+      const res = await fetch(`${import.meta.env.VITE_API_BASE_URL || ''}/api/chat/user/${currentUser._id}`);
       const data = await res.json();
       if (data.success) {
         setChats(data.data);

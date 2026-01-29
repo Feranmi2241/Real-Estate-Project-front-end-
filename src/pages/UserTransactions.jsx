@@ -17,7 +17,7 @@ export default function UserTransactions() {
 
   const fetchTransactions = async () => {
     try {
-      const res = await fetch(`/api/transactions/user/${currentUser._id}`, {
+      const res = await fetch(`${import.meta.env.VITE_API_BASE_URL || ''}/api/transactions/user/${currentUser._id}`, {
         method: 'GET',
         credentials: 'include',
         headers: {
@@ -49,7 +49,7 @@ export default function UserTransactions() {
 
   const downloadReceipt = async (transactionId) => {
     try {
-      const res = await fetch(`/api/transactions/receipt/${transactionId}`, {
+      const res = await fetch(`${import.meta.env.VITE_API_BASE_URL || ''}/api/transactions/receipt/${transactionId}`, {
         method: 'GET',
         credentials: 'include',
         headers: {

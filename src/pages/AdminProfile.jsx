@@ -28,7 +28,7 @@ export default function AdminProfile() {
     // Load admin data on component mount
     const loadAdminData = async () => {
       try {
-        const res = await fetch('/api/admin/auth/profile');
+        const res = await fetch(`${import.meta.env.VITE_API_BASE_URL || ''}/api/admin/auth/profile`);
         const data = await res.json();
         if (data.success) {
           setFormData(prev => ({
@@ -89,7 +89,7 @@ export default function AdminProfile() {
       setLoading(true);
       setError('');
       
-      const res = await fetch('/api/admin/auth/update-profile', {
+      const res = await fetch(`${import.meta.env.VITE_API_BASE_URL || ''}/api/admin/auth/update-profile`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

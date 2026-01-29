@@ -52,7 +52,7 @@ export default function AdminDashboard() {
   const fetchListings = async () => {
     setLoading(true);
     try {
-      const res = await fetch('/api/listing/admin/all?limit=1000');
+      const res = await fetch(`${import.meta.env.VITE_API_BASE_URL || ''}/api/listing/admin/all?limit=1000`);
       const data = await res.json();
       setListings(Array.isArray(data) ? data : []);
     } catch (error) {
@@ -119,7 +119,7 @@ export default function AdminDashboard() {
     }
     
     try {
-      const response = await fetch(`/api/listing/admin/bank-config/${type}`, {
+      const response = await fetch(`${import.meta.env.VITE_API_BASE_URL || ''}/api/listing/admin/bank-config/${type}`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(config)
@@ -141,7 +141,7 @@ export default function AdminDashboard() {
   const fetchAnalytics = async (type) => {
     setLoadingAnalytics(prev => ({...prev, [type]: true}));
     try {
-      const res = await fetch(`/api/analytics/${type}`, {
+      const res = await fetch(`${import.meta.env.VITE_API_BASE_URL || ''}/api/analytics/${type}`, {
         credentials: 'include'
       });
       const data = await res.json();
@@ -167,7 +167,7 @@ export default function AdminDashboard() {
     }
 
     try {
-      const res = await fetch(`/api/listing/admin/delete/${id}`, { 
+      const res = await fetch(`${import.meta.env.VITE_API_BASE_URL || ''}/api/listing/admin/delete/${id}`, { 
         method: 'DELETE'
       });
       
@@ -263,7 +263,7 @@ export default function AdminDashboard() {
           
           <button
             onClick={async () => {
-              await fetch('/api/admin/auth/logout', { method: 'POST' });
+              await fetch(`${import.meta.env.VITE_API_BASE_URL || ''}/api/admin/auth/logout`, { method: 'POST' });
               localStorage.removeItem('adminAuth');
               window.location.href = '/admin/login';
             }}

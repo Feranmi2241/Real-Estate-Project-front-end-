@@ -26,7 +26,10 @@ const SignIn = () => {
 
     try {
       dispatch(signInStart());
-      const res = await fetch("/api/auth/signin", {  
+      const apiUrl = `${import.meta.env.VITE_API_BASE_URL || ''}/api/auth/signin`;
+      console.log('API URL:', apiUrl);
+      console.log('Environment variable:', import.meta.env.VITE_API_BASE_URL);
+      const res = await fetch(apiUrl, {  
         method: "POST",
         headers: {
           "Content-Type": "application/json",

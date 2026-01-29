@@ -47,7 +47,7 @@ export default function AdminCreateListing() {
     if (isEditMode) {
       const fetchListing = async () => {
         try {
-          const res = await fetch(`/api/listing/get/${params.listingId}`);
+          const res = await fetch(`${import.meta.env.VITE_API_BASE_URL || ''}/api/listing/get/${params.listingId}`);
           const data = await res.json();
           if (data.success === false) {
             setError(data.message);
@@ -205,8 +205,8 @@ export default function AdminCreateListing() {
       const { _id, __v, userRef, createdAt, updatedAt, ...submitData } = formData;
       
       const url = isEditMode 
-        ? `/api/listing/admin/update/${params.listingId}`
-        : '/api/listing/admin/create';
+        ? `${import.meta.env.VITE_API_BASE_URL || ''}/api/listing/admin/update/${params.listingId}`
+        : `${import.meta.env.VITE_API_BASE_URL || ''}/api/listing/admin/create`;
       
       const res = await fetch(url, {
         method: 'POST',

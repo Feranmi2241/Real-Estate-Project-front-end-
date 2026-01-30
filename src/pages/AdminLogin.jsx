@@ -58,20 +58,24 @@ export default function AdminLogin() {
     setError('');
 
     try {
-      const res = await fetch(`${import.meta.env.VITE_API_BASE_URL || ''}/api/admin/auth/forgot-password`, {
+      const apiUrl = `${import.meta.env.VITE_API_BASE_URL || ''}/api/admin/auth/forgot-password`;
+      console.log('Forgot password API URL:', apiUrl);
+      const res = await fetch(apiUrl, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email: formData.email })
       });
 
       const data = await res.json();
+      console.log('Forgot password response:', data);
 
       if (data.success) {
         navigate('/admin/verify-otp', { state: { email: formData.email } });
       } else {
-        setError(data.message);
+        setError(data.message || 'Failed to send verification code');
       }
     } catch (error) {
+      console.error('Forgot password error:', error);
       setError('Failed to send verification code');
     }
     setForgotLoading(false);

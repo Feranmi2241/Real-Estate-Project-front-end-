@@ -31,6 +31,7 @@ export default function ForgotPassword() {
       });
 
       const data = await res.json();
+      console.log('Forgot password response:', data);
 
       if (data.success) {
         setMessage('Verification code sent to your email!');
@@ -41,7 +42,8 @@ export default function ForgotPassword() {
         setError(data.message || 'Failed to send verification code');
       }
     } catch (error) {
-      setError('Something went wrong. Please try again.');
+      console.error('Forgot password error:', error);
+      setError('Connection timeout.');
     }
     setLoading(false);
   };

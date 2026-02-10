@@ -425,7 +425,7 @@ export default function AdminCreateListing() {
                     type="number"
                     id="regularPrice"
                     min="50"
-                    max="10000000"
+                    max="10000000000000000"
                     required
                     className="w-full p-3 bg-white/5 border border-yellow-400/30 rounded-xl text-white focus:border-yellow-400 focus:ring-2 focus:ring-yellow-400/20 transition-all duration-300"
                     onChange={handleChange}
@@ -445,7 +445,7 @@ export default function AdminCreateListing() {
                       type="number"
                       id="discountPrice"
                       min="0"
-                      max="10000000"
+                      max="1000000000"
                       required
                       className="w-full p-3 bg-white/5 border border-red-400/30 rounded-xl text-white focus:border-red-400 focus:ring-2 focus:ring-red-400/20 transition-all duration-300"
                       onChange={handleChange}

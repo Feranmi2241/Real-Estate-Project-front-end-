@@ -90,7 +90,13 @@ export default function UserChatHistory() {
           </div>
         ) : (
           <div className='space-y-6 animate-fade-in-up animation-delay-200'>
-            {chats.map((chat, index) => (
+            {chats.map((chat, index) => {
+              // Skip rendering if listing is null or doesn't exist
+              if (!chat.listingId) {
+                return null;
+              }
+              
+              return (
               <div 
                 key={chat._id}
                 onClick={() => openChat(chat._id)}
@@ -99,16 +105,16 @@ export default function UserChatHistory() {
               >
                 <div className='flex flex-col sm:flex-row items-start sm:items-center space-y-4 sm:space-y-0 sm:space-x-6'>
                   <img 
-                    src={chat.listingId.imageUrls[0]} 
-                    alt={chat.listingId.name}
+                    src={chat.listingId?.imageUrls?.[0] || 'https://via.placeholder.com/96'} 
+                    alt={chat.listingId?.name || 'Property'}
                     className='w-full sm:w-24 h-48 sm:h-24 object-cover rounded-2xl shadow-lg'
                   />
                   <div className='flex-1 w-full'>
                     <div className='flex flex-col sm:flex-row justify-between items-start space-y-2 sm:space-y-0'>
                       <div className='flex-1'>
-                        <h3 className='font-semibold text-lg sm:text-xl text-blue-400 hover:text-blue-300 transition-colors duration-300'>{chat.listingId.name}</h3>
-                        <p className='text-white/70 text-sm sm:text-base mt-1'>{chat.listingId.address}</p>
-                        <p className='text-green-400 font-semibold text-lg mt-2'>₦{chat.listingId.regularPrice.toLocaleString()}</p>
+                        <h3 className='font-semibold text-lg sm:text-xl text-blue-400 hover:text-blue-300 transition-colors duration-300'>{chat.listingId?.name || 'Property Deleted'}</h3>
+                        <p className='text-white/70 text-sm sm:text-base mt-1'>{chat.listingId?.address || 'Address unavailable'}</p>
+                        <p className='text-green-400 font-semibold text-lg mt-2'>₦{chat.listingId?.regularPrice?.toLocaleString() || 'N/A'}</p>
                       </div>
                       <div className='text-left sm:text-right'>
                         <p className='text-xs sm:text-sm text-white/60 mb-2'>{formatTime(chat.lastMessageTime)}</p>
@@ -121,7 +127,8 @@ export default function UserChatHistory() {
                   </div>
                 </div>
               </div>
-            ))}
+              );
+            })}
           </div>
         )}
 

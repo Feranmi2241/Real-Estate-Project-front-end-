@@ -10,7 +10,8 @@ export default function RevenueReport() {
     setLoading(true);
     setError(null);
     try {
-      const res = await fetch('/api/revenue/report');
+      const apiUrl = import.meta.env.VITE_API_BASE_URL || '';
+      const res = await fetch(`${apiUrl}/api/revenue/report`);
       const data = await res.json();
       if (data.success) {
         setReportData(data.data);

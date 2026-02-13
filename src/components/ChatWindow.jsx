@@ -22,7 +22,8 @@ export default function ChatWindow({ chatId, onClose }) {
 
   const fetchMessages = async () => {
     try {
-      const res = await fetch(`/api/chat/messages/${chatId}`);
+      const apiUrl = import.meta.env.VITE_API_BASE_URL || '';
+      const res = await fetch(`${apiUrl}/api/chat/messages/${chatId}`);
       const data = await res.json();
       if (data.success) {
         setMessages(data.data);
@@ -37,7 +38,8 @@ export default function ChatWindow({ chatId, onClose }) {
     
     setLoading(true);
     try {
-      const res = await fetch('/api/chat/message', {
+      const apiUrl = import.meta.env.VITE_API_BASE_URL || '';
+      const res = await fetch(`${apiUrl}/api/chat/message`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

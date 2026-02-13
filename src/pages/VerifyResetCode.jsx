@@ -39,7 +39,8 @@ export default function VerifyResetCode() {
     setError('');
 
     try {
-      const res = await fetch('/api/forgot-password/verify-code', {
+      const apiUrl = import.meta.env.VITE_API_BASE_URL || '';
+      const res = await fetch(`${apiUrl}/api/forgot-password/verify-code`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, code })
@@ -49,7 +50,7 @@ export default function VerifyResetCode() {
 
       if (data.success) {
         // Get user data and sign them in
-        const userRes = await fetch(`/api/user/public/${data.userId}`);
+        const userRes = await fetch(`${apiUrl}/api/user/public/${data.userId}`);
         const userData = await userRes.json();
         
         dispatch(signInSuccess(userData));
@@ -68,7 +69,8 @@ export default function VerifyResetCode() {
     setError('');
 
     try {
-      const res = await fetch('/api/forgot-password/request-code', {
+      const apiUrl = import.meta.env.VITE_API_BASE_URL || '';
+      const res = await fetch(`${apiUrl}/api/forgot-password/request-code`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email })

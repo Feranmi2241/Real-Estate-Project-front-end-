@@ -27,7 +27,8 @@ export default function AdminTransactions() {
       if (filters.provider) queryParams.append('provider', filters.provider);
       if (filters.email && filters.email.trim()) queryParams.append('email', filters.email.trim());
       
-      const res = await fetch(`/api/admin/transactions?${queryParams}`);
+      const apiUrl = import.meta.env.VITE_API_BASE_URL || '';
+      const res = await fetch(`${apiUrl}/api/admin/transactions?${queryParams}`);
       const data = await res.json();
       
       if (data.success) {
@@ -41,7 +42,8 @@ export default function AdminTransactions() {
 
   const verifyTransaction = async (id) => {
     try {
-      const res = await fetch(`/api/admin/transactions/${id}/verify`, {
+      const apiUrl = import.meta.env.VITE_API_BASE_URL || '';
+      const res = await fetch(`${apiUrl}/api/admin/transactions/${id}/verify`, {
         method: 'PATCH'
       });
       const data = await res.json();
